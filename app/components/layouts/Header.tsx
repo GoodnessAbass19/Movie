@@ -5,7 +5,7 @@ import SearchInput from "./Search";
 
 const Header = () => {
   return (
-    <div className="bg-black top-0 fixed z-20 w-full py-3 px-5 mx-auto">
+    <div className="bg-black max-w-screen-2xl w-full py-3 px-5 mx-auto">
       <div className="mx-auto flex justify-between items-center">
         <Link
           href={"/"}
