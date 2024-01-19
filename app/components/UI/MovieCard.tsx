@@ -6,6 +6,11 @@ import React from "react";
 const MovieCard = ({ movie }: { movie: Movie }) => {
   const imagePath = "https://image.tmdb.org/t/p/original";
 
+  const dateString = movie.release_date;
+  const dateObject = new Date(dateString);
+
+  const year = dateObject.getFullYear();
+
   return (
     <div key={movie.id}>
       <Link
@@ -26,6 +31,7 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
         >
           {movie.title}
         </h2>
+        {/* <span className="text-sm">{year}</span> */}
       </Link>
     </div>
   );

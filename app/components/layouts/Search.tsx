@@ -29,7 +29,7 @@ function SearchInput() {
     // ✅ This will be type-safe and validated.
     console.log(values);
 
-    router.push(`/search/${values.input}`);
+    router.push(`/search?search=${values.input}`);
     form.reset();
   }
 
