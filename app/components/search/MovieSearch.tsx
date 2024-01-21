@@ -31,7 +31,11 @@ const MovieSearch = () => {
   }
 
   if (isFetching) {
-    return <div>Loading.....</div>;
+    return (
+      <div className="min-h-screen flex flex-col justify-center items-center">
+        Loading.....
+      </div>
+    );
   }
 
   const getImagePath = (imagePath?: string, fullSize?: boolean) => {
@@ -44,7 +48,7 @@ const MovieSearch = () => {
 
   return (
     <div className="grid gap-y-5">
-      <h2 className="text-xl font-bold py-2 capitalize">MOVIES</h2>
+      {/* <h2 className="text-xl font-bold py-2 capitalize">MOVIES</h2> */}
       <div className="grid gap-y-10 gap-x-5 ">
         {data?.results.map((item) => (
           <div key={item.id} className="flex items-center gap-x-5">

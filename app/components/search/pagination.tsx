@@ -9,10 +9,9 @@ import {
 } from "@/components/ui/pagination";
 import { useRouter, useSearchParams } from "next/navigation";
 
-const Pagination = () => {
+const Pagination = ({ total }: { total: number | undefined }) => {
   const searchParams = useSearchParams();
   const search = searchParams.get("search");
-  // const number = searchParams.get()
   const [page, setPage] = useState(1);
   const router = useRouter();
 
@@ -21,7 +20,7 @@ const Pagination = () => {
   };
 
   const renderPaginationButtons = () => {
-    const totalPages = 20;
+    const totalPages = total || 20;
     const currentPage = page;
     const visiblePages = 5;
     const delta = Math.floor((visiblePages - 1) / 2);

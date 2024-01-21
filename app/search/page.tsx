@@ -4,8 +4,39 @@ import { useState } from "react";
 import MovieSearch from "../components/search/MovieSearch";
 import TvSearch from "../components/search/TvSearch";
 import Paginations from "../components/search/pagination";
+import requests from "@/utils/Request";
+import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+import { MovieData } from "@/types";
 
-const page = ({ searchParams }: { searchParams: { search: string } }) => {
+const page = ({
+  searchParams,
+}: {
+  searchParams: { search: string; page: string };
+}) => {
+  const movies = async () => {
+    const res = await axios.get(
+      `${requests.searchMovies}&query=${
+        searchParams.search
+      }&include_adult=false&language=en-US&page=${searchParams.page || "1"}`
+    );
+    return res.data;
+  };
+  const { data, error, isFetching } = useQuery<MovieData>({
+    queryKey: ["search-movies", searchParams.search, searchParams.page],
+    queryFn: movies,
+    staleTime: 5000, // Keep cached data indefinitely
+  });
+
+  if (error) {
+    console.log(error);
+    return <div>there was an error</div>;
+  }
+
+  // if (isFetching) {
+  //   return <div>Loading.....</div>;
+  // }
+
   return (
     <div className="max-w-screen-2xl mx-auto space-y-5 px-5 py-10">
       <div className="flex flex-col space-y-5">
@@ -14,9 +45,10 @@ const page = ({ searchParams }: { searchParams: { search: string } }) => {
         </h1>
 
         <MovieSearch />
+
         <TvSearch />
 
-        <Paginations />
+        <Paginations total={data?.total_pages} />
       </div>
     </div>
   );

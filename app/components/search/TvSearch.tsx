@@ -29,9 +29,9 @@ const TvSearch = () => {
     return <div>there was an error</div>;
   }
 
-  if (isFetching) {
-    return <div>Loading.....</div>;
-  }
+  // if (isFetching) {
+  //   return <div>Loading.....</div>;
+  // }
 
   const getImagePath = (imagePath?: string, fullSize?: boolean) => {
     return imagePath
@@ -43,7 +43,7 @@ const TvSearch = () => {
 
   return (
     <div className="grid gap-y-5">
-      <h2 className="text-xl font-bold py-2 capitalize">Tv shows</h2>
+      {/* <h2 className="text-xl font-bold py-2 capitalize">Tv shows</h2> */}
       <div className="grid gap-y-10 gap-x-5 ">
         {data?.results.map((item) => (
           <div key={item.id} className="flex items-center gap-x-5">

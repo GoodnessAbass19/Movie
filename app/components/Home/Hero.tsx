@@ -6,9 +6,10 @@ import Image from "next/image";
 import Link from "next/link";
 import requests from "@/utils/Request";
 import { useEffect, useState } from "react";
+import { TVShow } from "@/types";
 
 const Hero = () => {
-  const [movie, setMovie] = useState([]);
+  const [movie, setMovie] = useState<TVShow>([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -41,7 +42,8 @@ const Hero = () => {
           </h1>
 
           <div>
-            <button
+            <Link
+              href={`/tv/${movie?.id}-${movie?.original_name}`}
               className="cursor-pointer text-white outline-none border-none font-bold rounded px-8 mr-4 pt-2 
                pb-2 hover:text-black hover:bg-[#e6e6e6] transition-all duration-200"
               style={{
@@ -49,7 +51,7 @@ const Hero = () => {
               }}
             >
               Play
-            </button>
+            </Link>
             <button
               className="cursor-pointer text-white outline-none border-none font-bold rounded px-8 mr-4 pt-2 
            pb-2 hover:text-black hover:bg-[#e6e6e6] transition-all duration-200"

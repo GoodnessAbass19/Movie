@@ -9,7 +9,7 @@ const TvShowCard = ({ movie }: { movie: TVShow }) => {
   return (
     <div key={movie.id}>
       <Link
-        href={`/movies/${movie.id}-${movie.name}`}
+        href={`/tv/${movie.id}-${movie.name}`}
         className="brightness-90 hover:brightness-105"
       >
         <Image

@@ -43,7 +43,7 @@ function SearchInput() {
             <FormItem>
               <FormControl>
                 <Input
-                  className="bg-black"
+                  className="bg-black text-white"
                   placeholder="Search..."
                   {...field}
                 />
