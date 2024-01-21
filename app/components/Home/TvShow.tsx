@@ -16,7 +16,7 @@ const TvShow = () => {
   const { data, error, isFetching } = useQuery<TVShowData>({
     queryKey: ["tv-show"],
     queryFn: movies,
-    staleTime: 50000, // Keep cached data indefinitely
+    staleTime: 5000, // Keep cached data indefinitely
   });
 
   if (error) {

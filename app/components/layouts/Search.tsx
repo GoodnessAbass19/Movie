@@ -27,9 +27,9 @@ function SearchInput() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
 
-    router.push(`/search?search=${values.input}`);
+    router.push(`/search?search=${values.input}`, { scroll: true });
+    router.refresh();
     form.reset();
   }
 

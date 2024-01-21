@@ -3,6 +3,8 @@ const API_KEY = "a6a239075f2d88a7adbd9adec3b60023";
 const requests = {
   fetchTrending: `/trending/all/week?api_key=${API_KEY}&language=en-US`,
   fetchTrendingMovies: `/trending/movie/day?api_key=${API_KEY}&language=en-US`,
+  searchMovies: `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}`,
+  searchTvShow: `https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}`,
   fetchTrendingTv: `/trending/tv/day?api_key=${API_KEY}&language=en-US`,
   fetchNetflixOriginals: `/discover/tv?api_key=${API_KEY}&with_networks=213`,
   fetchTopRated: `/movie/top_rated?api_key=${API_KEY}&language=en-US`,
