@@ -39,7 +39,7 @@ const page = ({
 
   return (
     <div className="max-w-screen-2xl mx-auto space-y-5 px-5 py-10">
-      <div className="flex flex-col space-y-5">
+      <div className="grid items-center justify-center space-y-5">
         <h1 className="text-2xl md:text-4xl font-bold capitalize">
           Results for {searchParams.search}
         </h1>
@@ -48,7 +48,7 @@ const page = ({
 
         <TvSearch />
 
-        <Paginations total={data?.total_pages} />
+        <Paginations link={`/search?search=${searchParams.search}`} total={data?.total_pages} />
       </div>
     </div>
   );

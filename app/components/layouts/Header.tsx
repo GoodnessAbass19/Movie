@@ -16,10 +16,10 @@ const Header = () => {
 
         <div className="md:hidden block">
           <div className="grid-cols-12 grid md:flex space-x-2 gap-2 w-full">
-            <div className="col-span-11">
+            <div className="col-span-10">
               <SearchInput />
             </div>
-            <div className="flex justify-between items-center col-span-1">
+            <div className="flex justify-between items-center col-span-2">
               <ThemeButton />
             </div>
           </div>

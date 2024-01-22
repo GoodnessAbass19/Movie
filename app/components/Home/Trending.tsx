@@ -2,12 +2,17 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ListBulletIcon, PlayCircleIcon } from "@heroicons/react/24/solid";
 import Movies from "./Movies";
 import TvShow from "./TvShow";
+import LatestMovies from "./LatestMovies";
+import PopularMovies from "./PopularMovies";
+import TopRatedMovies from "./TopRatedMovies";
+import UpcomingMovies from "./UpcomingMovies";
+import PopularTvShow from "./PopularTvShow";
 
 const Trending = () => {
   return (
     <Tabs
       defaultValue="movies"
-      className="max-w-screen-2xl mx-auto space-y-5 px-5"
+      className="max-w-screen-2xl mx-auto space-y-10 px-5 pb-10"
     >
       <div className="flex gap-x-10 items-center">
         <span className="text-xl font-semibold capitalize">trending</span>
@@ -23,11 +28,16 @@ const Trending = () => {
         </TabsList>
       </div>
 
-      <TabsContent value="movies">
+      <TabsContent value="movies" className="space-y-10">
         <Movies />
+        <PopularMovies />
+        <LatestMovies />
+        <TopRatedMovies />
+        <UpcomingMovies />
       </TabsContent>
-      <TabsContent value="tv-show">
+      <TabsContent value="tv-show" className="space-y-10">
         <TvShow />
+        <PopularTvShow />
       </TabsContent>
     </Tabs>
   );

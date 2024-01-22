@@ -9,7 +9,13 @@ import {
 } from "@/components/ui/pagination";
 import { useRouter, useSearchParams } from "next/navigation";
 
-const Pagination = ({ total }: { total: number | undefined }) => {
+const Pagination = ({
+  total,
+  link,
+}: {
+  total: number | undefined;
+  link: string;
+}) => {
   const searchParams = useSearchParams();
   const search = searchParams.get("search");
   const [page, setPage] = useState(1);
@@ -56,7 +62,7 @@ const Pagination = ({ total }: { total: number | undefined }) => {
           } hover:bg-blue-500 hover:text-white font-semibold py-2 px-2.5 md:px-4 mx-1 rounded`}
           onClick={() => {
             handlePageChange(i);
-            router.push(`/search?search=${search}&page=${i}`);
+            router.push(`${link}&page=${i}`);
           }}
         >
           {i}
@@ -73,7 +79,7 @@ const Pagination = ({ total }: { total: number | undefined }) => {
         // href={`/search?search=${search}&page=${currentPage - 1}`}
         onClick={() => {
           handlePageChange(currentPage - 1);
-          router.push(`/search?search=${search}&page=${currentPage - 1}`);
+          router.push(`${link}&page=${currentPage - 1}`);
         }}
         disabled={currentPage === 1}
       >
@@ -88,7 +94,7 @@ const Pagination = ({ total }: { total: number | undefined }) => {
         } bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-2 md:px-4 rounded`}
         onClick={() => {
           handlePageChange(currentPage + 1);
-          router.push(`/search?search=${search}&page=${currentPage + 1}`);
+          router.push(`${link}&page=${currentPage + 1}`);
         }}
         disabled={currentPage === totalPages}
       >

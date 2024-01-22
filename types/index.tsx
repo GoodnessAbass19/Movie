@@ -1,3 +1,5 @@
+import { useEffect, useRef, useState } from "react";
+
 export type MovieData = {
   page: number;
   results: Movie[];
@@ -45,4 +47,20 @@ export type TVShow = {
   vote_average: number;
   vote_count: number;
   origin_country: string[];
+};
+
+export const useSwiperRef = <T extends HTMLElement>(): [
+  T | null,
+  React.Ref<T>
+] => {
+  const [wrapper, setWrapper] = useState<T | null>(null);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    if (ref.current) {
+      setWrapper(ref.current);
+    }
+  }, []);
+
+  return [wrapper, ref];
 };

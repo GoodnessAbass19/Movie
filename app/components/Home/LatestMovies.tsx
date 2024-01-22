@@ -1,27 +1,35 @@
 "use client";
 
-import { MovieData, TVShowData } from "@/types";
+import { MovieData } from "@/types";
 import requests from "@/utils/Request";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import TvShowCard from "../UI/TvShowCard";
+import { useSearchParams } from "next/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Scrollbar } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/scrollbar";
 import "swiper/css/free-mode";
+import MovieCard from "../UI/MovieCard";
+import Link from "next/link";
+import {
+  ArrowRightCircleIcon,
+  ArrowRightIcon,
+} from "@heroicons/react/24/solid";
 
-const movies = async () => {
-  const res = await axios.get(
-    `https://api.themoviedb.org/3${requests.fetchTrendingTv}`
-  );
-  return res.data;
-};
-const TvShow = () => {
-  const { data, error, isFetching } = useQuery<TVShowData>({
-    queryKey: ["tv-show"],
+const LatestMovies = () => {
+  const searchParams = useSearchParams();
+  const page = searchParams.get("page") || "1";
+  const movies = async () => {
+    const res = await axios.get(
+      `${requests.fetchLatestMovies}&include_adult=false&language=en-US&page=${page}`
+    );
+    return res.data;
+  };
+  const { data, error, isFetching } = useQuery<MovieData>({
+    queryKey: ["latest-movies", page],
     queryFn: movies,
-    staleTime: 50000, // Keep cached data indefinitely
+    staleTime: 5000, // Keep cached data indefinitely
   });
 
   if (error) {
@@ -30,17 +38,28 @@ const TvShow = () => {
   }
 
   if (isFetching) {
-    return <div>Loading.....</div>;
+    return null;
   }
 
   return (
-    <>
+    <div className="space-y-2">
+      <div className="flex justify-between items-center">
+        <h2 className="text-xl font-bold py-2 capitalize">latest Movies</h2>
+
+        <Link
+          href={"/movie"}
+          className="text-lg md:text-xl font-medium capitalize gap-x-1"
+        >
+          view more
+          <ArrowRightIcon className="w-5 h-5 inline-block pl-1" />
+        </Link>
+      </div>
       <Swiper
         scrollbar={{
-          hide: true,
           draggable: true,
           snapOnRelease: true,
           dragSize: 100,
+          hide: true,
         }}
         slidesPerView={2.5}
         spaceBetween={20}
@@ -63,7 +82,6 @@ const TvShow = () => {
           },
         }}
         freeMode={true}
-        // grabCursor={true}
         keyboard={{
           enabled: true,
         }}
@@ -72,17 +90,18 @@ const TvShow = () => {
       >
         {data?.results.map((item) => (
           <SwiperSlide key={item.id} className="mb-5">
-            <TvShowCard movie={item} />
+            <MovieCard key={item.id} movie={item} />
           </SwiperSlide>
         ))}
       </Swiper>
+
       {/* <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-y-10 gap-x-5">
         {data?.results.map((item) => (
-          <TvShowCard key={item.id} movie={item} />
+          <MovieCard key={item.id} movie={item} />
         ))}
       </div> */}
-    </>
+    </div>
   );
 };
 
-export default TvShow;
+export default LatestMovies;

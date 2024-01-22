@@ -21,7 +21,7 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
           src={imagePath + movie.poster_path}
           alt={movie.title}
           width={500}
-          height={300}
+          height={500}
           className="w-full h-full rounded-md"
           priority
         />

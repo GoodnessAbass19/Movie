@@ -26,12 +26,12 @@ const Hero = () => {
 
     fetchData();
   }, []);
-  console.log(movie);
+  // console.log(movie);
 
   return (
     <div className="">
       <header
-        className="h-[448px] relative text-white object-contain bg-cover bg-center bg-no-repeat"
+        className="h-[448px] relative text-white object-cover bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: `url("https://image.tmdb.org/t/p/original/${movie?.backdrop_path}")`,
         }}
