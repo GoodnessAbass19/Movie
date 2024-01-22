@@ -11,7 +11,9 @@ const requests = {
   searchTvShow: `https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}`,
   fetchTrendingTv: `/trending/tv/day?api_key=${API_KEY}&language=en-US`,
   fetchPopularTv: `https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}`,
-
+  fetchLatestTv: `https://api.themoviedb.org/3/tv/airing_today?api_key=${API_KEY}`,
+  fetchTopRatedTv: `https://api.themoviedb.org/3/tv/top_rated?api_key=${API_KEY}`,
+  fetchOnAirTv: `https://api.themoviedb.org/3/tv/on_the_air?api_key=${API_KEY}`,
   fetchNetflixOriginals: `/discover/tv?api_key=${API_KEY}&with_networks=213`,
   fetchTopRated: `/movie/top_rated?api_key=${API_KEY}&language=en-US`,
   fetchActionMovies: `/discover/movie?api_key=${API_KEY}&with_genres=28`,

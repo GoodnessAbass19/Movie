@@ -7,6 +7,9 @@ import PopularMovies from "./PopularMovies";
 import TopRatedMovies from "./TopRatedMovies";
 import UpcomingMovies from "./UpcomingMovies";
 import PopularTvShow from "./PopularTvShow";
+import LatestTvShow from "./LatestTvShow";
+import TopRatedTv from "./TopRatedTv";
+import OnAirTvShow from "./OnAirTvShow";
 
 const Trending = () => {
   return (
@@ -35,9 +38,13 @@ const Trending = () => {
         <TopRatedMovies />
         <UpcomingMovies />
       </TabsContent>
+
       <TabsContent value="tv-show" className="space-y-10">
         <TvShow />
         <PopularTvShow />
+        <LatestTvShow />
+        <TopRatedTv />
+        <OnAirTvShow />
       </TabsContent>
     </Tabs>
   );

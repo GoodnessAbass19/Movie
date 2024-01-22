@@ -16,15 +16,15 @@ import {
   ArrowRightIcon,
 } from "@heroicons/react/24/solid";
 
-const PopularTvShow = () => {
+const LatestTvShow = () => {
   const movies = async () => {
     const res = await axios.get(
-      `${requests.fetchPopularTv}&include_adult=false&language=en-US&page=1`
+      `${requests.fetchLatestTv}&include_adult=false&language=en-US&page=1`
     );
     return res.data;
   };
   const { data, error, isFetching } = useQuery<TVShowData>({
-    queryKey: ["popular-tv"],
+    queryKey: ["latest-tv"],
     queryFn: movies,
     staleTime: 5000, // Keep cached data indefinitely
   });
@@ -41,10 +41,12 @@ const PopularTvShow = () => {
   return (
     <div className="space-y-2">
       <div className="flex justify-between items-center">
-        <h2 className="text-xl font-bold py-2 capitalize">popular TV shows</h2>
+        <h2 className="text-xl font-bold py-2 capitalize">
+          TV Shows Airing Today
+        </h2>
 
         <Link
-          href={"/tv"}
+          href={"/movie"}
           className="text-lg md:text-xl font-medium capitalize gap-x-1"
         >
           view more
@@ -94,12 +96,12 @@ const PopularTvShow = () => {
         ))}
       </Swiper>
       {/* <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-y-10 gap-x-5">
-      {data?.results.map((item) => (
-        <TvShowCard key={item.id} movie={item} />
-      ))}
-    </div> */}
+  {data?.results.map((item) => (
+    <TvShowCard key={item.id} movie={item} />
+  ))}
+</div> */}
     </div>
   );
 };
 
-export default PopularTvShow;
+export default LatestTvShow;

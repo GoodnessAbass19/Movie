@@ -13,12 +13,17 @@ const TvShowCard = ({ movie }: { movie: TVShow }) => {
         className="brightness-90 hover:brightness-105"
       >
         <Image
-          src={imagePath + movie.poster_path}
+          src={
+            imagePath + movie.poster_path || "https://via.placeholder.com/300"
+          }
           alt={movie.name}
           width={500}
           height={300}
           className="w-full h-full rounded-md"
           priority
+          blurDataURL={
+            imagePath + movie.poster_path || "https://via.placeholder.com/300"
+          }
         />
         <h2
           className="text-sm font-medium capitalize 

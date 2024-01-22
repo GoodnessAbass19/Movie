@@ -41,7 +41,9 @@ const UpcomingMovies = () => {
   return (
     <div className="space-y-2">
       <div className="flex justify-between items-center">
-        <h2 className="text-xl font-bold py-2 capitalize">coming soon</h2>
+        <h2 className="text-xl font-bold py-2 capitalize">
+          Now Playing Movies
+        </h2>
 
         <Link
           href={"/movie"}

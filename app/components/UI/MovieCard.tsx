@@ -18,12 +18,17 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
         className="brightness-90 hover:brightness-105"
       >
         <Image
-          src={imagePath + movie.poster_path}
+          src={
+            imagePath + movie.poster_path || "https://via.placeholder.com/300"
+          }
           alt={movie.title}
           width={500}
           height={500}
           className="w-full h-full rounded-md"
           priority
+          blurDataURL={
+            imagePath + movie.poster_path || "https://via.placeholder.com/300"
+          }
         />
         <h2
           className="text-sm font-medium capitalize 
