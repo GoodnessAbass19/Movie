@@ -47,7 +47,7 @@ const LatestMovies = () => {
         <h2 className="text-xl font-bold py-2 capitalize">Upcoming Movies</h2>
 
         <Link
-          href={"/movie"}
+          href={"/movies/upcoming"}
           className="text-lg md:text-xl font-medium capitalize gap-x-1"
         >
           view more

@@ -19,7 +19,7 @@ import {
 const UpcomingMovies = () => {
   const movies = async () => {
     const res = await axios.get(
-      `${requests.fetchUpcomingMovies}&include_adult=false&language=en-US&page=1&release_date.gte={2024-01-01}&release_date.lte={2024-02-20}`
+      `${requests.fetchUpcomingMovies}&include_adult=false&language=en-US&page=1&release_date.gte={2024-01-01}&release_date.lte={2024-12-20}`
     );
     return res.data;
   };
@@ -46,7 +46,7 @@ const UpcomingMovies = () => {
         </h2>
 
         <Link
-          href={"/movie"}
+          href={"/movies"}
           className="text-lg md:text-xl font-medium capitalize gap-x-1"
         >
           view more

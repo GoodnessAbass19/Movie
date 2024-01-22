@@ -48,7 +48,10 @@ const page = ({
 
         <TvSearch />
 
-        <Paginations link={`/search?search=${searchParams.search}`} total={data?.total_pages} />
+        <Paginations
+          link={`/search?search=${searchParams.search}&page=`}
+          total={data?.total_pages}
+        />
       </div>
     </div>
   );

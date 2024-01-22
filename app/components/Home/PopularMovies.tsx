@@ -43,7 +43,7 @@ const PopularMovies = () => {
         <h2 className="text-xl font-bold py-2 capitalize">popular Movies</h2>
 
         <Link
-          href={"/movie"}
+          href={"/movies"}
           className="text-lg md:text-xl font-medium capitalize gap-x-1"
         >
           view more
