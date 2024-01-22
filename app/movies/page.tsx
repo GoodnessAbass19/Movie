@@ -6,18 +6,21 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import MovieCard from "../components/UI/MovieCard";
 import Paginations from "../components/search/pagination";
+import { useSearchParams } from "next/navigation";
 
 const page = ({ searchParams }: { searchParams: { page: string } }) => {
+  const page = useSearchParams();
+  const note = page.get("page");
   const movies = async () => {
     const res = await axios.get(
       `${requests.fetchPopularMovies}&include_adult=false&language=en-US&page=${
-        searchParams.page || 1
+        note || "1"
       }`
     );
     return res.data;
   };
   const { data, error, isFetching } = useQuery<MovieData>({
-    queryKey: ["movies-discover", searchParams.page],
+    queryKey: ["movies-discover", note],
     queryFn: movies,
     staleTime: 5000, // Keep cached data indefinitely
   });
@@ -49,8 +52,7 @@ const page = ({ searchParams }: { searchParams: { page: string } }) => {
       </div>
 
       <div className="mt-10">
-        {/* Use correct format for link */}
-        <Paginations total={data?.total_pages} link="/movies?page=" />
+        <Paginations total={data?.total_pages} link="/movies?" />
       </div>
     </div>
   );

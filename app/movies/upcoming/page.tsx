@@ -49,7 +49,7 @@ const page = ({ searchParams }: { searchParams: { page: string } }) => {
       </div>
 
       <div className="mt-10">
-        <Paginations total={data?.total_pages} link="/movies/upcoming?page=" />
+        <Paginations total={data?.total_pages} link="/movies/upcoming?" />
       </div>
     </div>
   );

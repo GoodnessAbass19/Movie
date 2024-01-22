@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   PaginationEllipsis,
   PaginationLink,
@@ -17,12 +17,18 @@ const Paginations = ({
   link: string;
 }) => {
   const searchParams = useSearchParams();
-  // const search = searchParams.get("search");
   const [page, setPage] = useState(1);
   const router = useRouter();
 
+  // Update page state when searchParams.page changes
+  useEffect(() => {
+    const currentPage = parseInt(searchParams.get("page") || "1", 10);
+    setPage(isNaN(currentPage) ? 1 : currentPage);
+  }, [searchParams]);
+
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
+    router.push(`${link}page=${newPage}`);
   };
 
   const renderPaginationButtons = () => {
@@ -54,7 +60,6 @@ const Paginations = ({
       pages.push(
         <button
           key={i}
-          // href={`/search?search=${search}&page=${i}`} // Fix the href to use i directly
           className={`${
             i === currentPage
               ? "bg-blue-500 text-white"
@@ -62,7 +67,6 @@ const Paginations = ({
           } hover:bg-blue-500 hover:text-white font-semibold py-2 px-2.5 md:px-4 mx-1 rounded`}
           onClick={() => {
             handlePageChange(i);
-            router.push(`${link}${i}`);
           }}
         >
           {i}
@@ -76,10 +80,8 @@ const Paginations = ({
         className={`${
           currentPage === 1 ? "cursor-not-allowed" : "cursor-pointer"
         } bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-2 md:px-4 rounded`}
-        // href={`/search?search=${search}&page=${currentPage - 1}`}
         onClick={() => {
           handlePageChange(currentPage - 1);
-          router.push(`${link}${currentPage - 1}`);
         }}
         disabled={currentPage === 1}
       >
@@ -88,13 +90,11 @@ const Paginations = ({
       pages,
       <button
         key="next"
-        // href={`/search?search=${search}&page=${currentPage + 1}`}
         className={`${
           currentPage === totalPages ? "cursor-not-allowed" : "cursor-pointer"
         } bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-2 md:px-4 rounded`}
         onClick={() => {
           handlePageChange(currentPage + 1);
-          router.push(`${link}${currentPage + 1}`);
         }}
         disabled={currentPage === totalPages}
       >
@@ -106,7 +106,6 @@ const Paginations = ({
       paginationButtons.splice(
         paginationButtons.length - 1,
         0,
-
         <PaginationEllipsis key={"dots"} className="text-white mx-1" />
       );
     }
