@@ -106,7 +106,10 @@ const Paginations = ({
       paginationButtons.splice(
         paginationButtons.length - 1,
         0,
-        <PaginationEllipsis key={"dots"} className="text-white mx-1" />
+        <PaginationEllipsis
+          key={"dots"}
+          className="dark:text-white text-black mx-1"
+        />
       );
     }
 

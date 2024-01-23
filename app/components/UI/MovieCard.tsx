@@ -9,7 +9,13 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
   const dateString = movie.release_date;
   const dateObject = new Date(dateString);
 
-  const year = dateObject.getFullYear();
+  const getImagePath = (imagePath?: string, fullSize?: boolean) => {
+    return imagePath
+      ? `http://image.tmdb.org/t/p/${
+          fullSize ? "original" : "w500"
+        }/${imagePath}`
+      : "https://links.papareact.com/o8z";
+  };
 
   return (
     <div key={movie.id}>
@@ -18,17 +24,13 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
         className="brightness-90 hover:brightness-105"
       >
         <Image
-          src={
-            imagePath + movie.poster_path || "https://via.placeholder.com/300"
-          }
+          src={getImagePath(movie.poster_path)}
           alt={movie.title}
           width={500}
           height={500}
           className="w-full h-full rounded-md"
           priority
-          blurDataURL={
-            imagePath + movie.poster_path || "https://via.placeholder.com/300"
-          }
+          blurDataURL={getImagePath(movie.poster_path)}
         />
         <h2
           className="text-sm font-medium capitalize 

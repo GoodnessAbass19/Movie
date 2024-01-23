@@ -19,7 +19,7 @@ const page = ({ searchParams }: { searchParams: { page: string } }) => {
   const { data, error, isFetching } = useQuery<MovieData>({
     queryKey: ["upcoming", searchParams.page],
     queryFn: movies,
-    staleTime: 5000, // Keep cached data indefinitely
+    staleTime: 500000, // Keep cached data indefinitely
   });
 
   if (error) {
@@ -29,8 +29,15 @@ const page = ({ searchParams }: { searchParams: { page: string } }) => {
 
   if (isFetching) {
     return (
-      <div className="min-h-screen flex flex-col justify-center items-center">
-        Loading.....
+      <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-y-10 gap-x-5 max-w-screen-2xl mx-auto">
+        {Array(20)
+          .fill(1)
+          .map((item, idx) => (
+            <div
+              key={idx}
+              className="animate-pulse lg:h-[300px] h-[300px] col-span-1 sm:col-span-1 lg:col-span-1 bg-[#312e81]"
+            />
+          ))}
       </div>
     );
   }

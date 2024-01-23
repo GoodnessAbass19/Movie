@@ -35,15 +35,24 @@ const UpcomingMovies = () => {
   }
 
   if (isFetching) {
-    return null;
+    return (
+      <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-y-10 gap-x-5 max-w-screen-2xl mx-auto">
+        {Array(7)
+          .fill(1)
+          .map((item, idx) => (
+            <div
+              key={idx}
+              className="animate-pulse lg:h-[300px] h-[300px] col-span-1 sm:col-span-1 lg:col-span-1 bg-[#312e81]"
+            />
+          ))}
+      </div>
+    );
   }
 
   return (
     <div className="space-y-2">
       <div className="flex justify-between items-center">
-        <h2 className="text-xl font-bold py-2 capitalize">
-          Now Playing Movies
-        </h2>
+        <h2 className="text-xl font-bold py-2 capitalize">in theater Movies</h2>
 
         <Link
           href={"/movies"}

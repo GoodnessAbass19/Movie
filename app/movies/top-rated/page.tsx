@@ -1,28 +1,25 @@
 "use client";
 
+import MovieCard from "@/app/components/UI/MovieCard";
+import Paginations from "@/app/components/search/pagination";
 import { MovieData } from "@/types";
 import requests from "@/utils/Request";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import MovieCard from "../components/UI/MovieCard";
-import Paginations from "../components/search/pagination";
-import { useSearchParams } from "next/navigation";
 
 const page = ({ searchParams }: { searchParams: { page: string } }) => {
-  const page = useSearchParams();
-  const note = page.get("page");
   const movies = async () => {
     const res = await axios.get(
-      `${requests.fetchPopularMovies}&include_adult=false&language=en-US&page=${
-        note || "1"
-      }`
+      `${
+        requests.fetchTopRatedMovies
+      }&include_adult=false&language=en-US&page=${searchParams.page || 1}`
     );
     return res.data;
   };
   const { data, error, isFetching } = useQuery<MovieData>({
-    queryKey: ["movies-discover", note],
+    queryKey: ["toprated-movies", searchParams.page],
     queryFn: movies,
-    staleTime: 5000, // Keep cached data indefinitely
+    staleTime: 500000, // Keep cached data indefinitely
   });
 
   if (error) {
@@ -32,6 +29,9 @@ const page = ({ searchParams }: { searchParams: { page: string } }) => {
 
   if (isFetching) {
     return (
+      //   <div className="min-h-screen flex flex-col justify-center items-center">
+      //     Loading.....
+      //   </div>
       <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-y-10 gap-x-5 max-w-screen-2xl mx-auto">
         {Array(20)
           .fill(1)
@@ -49,7 +49,7 @@ const page = ({ searchParams }: { searchParams: { page: string } }) => {
     <div className="max-w-screen-2xl mx-auto px-5 py-10">
       <div className="grid items-center justify-center space-y-10">
         <h1 className="text-2xl md:text-4xl font-bold capitalize">
-          popular movies
+          top rated Movies
         </h1>
         <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-y-10 gap-x-5">
           {data?.results.map((item) => (
@@ -59,7 +59,7 @@ const page = ({ searchParams }: { searchParams: { page: string } }) => {
       </div>
 
       <div className="mt-10">
-        <Paginations total={data?.total_pages} link="/movies?" />
+        <Paginations total={data?.total_pages} link="/movies/top-rated?" />
       </div>
     </div>
   );

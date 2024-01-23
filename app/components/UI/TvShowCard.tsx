@@ -5,6 +5,13 @@ import React from "react";
 
 const TvShowCard = ({ movie }: { movie: TVShow }) => {
   const imagePath = "https://image.tmdb.org/t/p/original";
+  const getImagePath = (imagePath?: string, fullSize?: boolean) => {
+    return imagePath
+      ? `http://image.tmdb.org/t/p/${
+          fullSize ? "original" : "w500"
+        }/${imagePath}`
+      : "https://links.papareact.com/o8z";
+  };
 
   return (
     <div key={movie.id}>
@@ -13,17 +20,13 @@ const TvShowCard = ({ movie }: { movie: TVShow }) => {
         className="brightness-90 hover:brightness-105"
       >
         <Image
-          src={
-            imagePath + movie.poster_path || "https://via.placeholder.com/300"
-          }
+          src={getImagePath(movie.poster_path)}
           alt={movie.name}
           width={500}
           height={300}
           className="w-full h-full rounded-md"
           priority
-          blurDataURL={
-            imagePath + movie.poster_path || "https://via.placeholder.com/300"
-          }
+          blurDataURL={getImagePath(movie.poster_path)}
         />
         <h2
           className="text-sm font-medium capitalize 
