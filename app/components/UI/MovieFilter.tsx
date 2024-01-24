@@ -66,7 +66,7 @@ const MovieFilter = () => {
       <div className="mt-10">
         <Paginations
           total={data?.total_pages}
-          link={`/movies?genre=${genre}&`}
+          link={`/movies/filter?genre=${genre}&`}
         />
       </div>
     </div>

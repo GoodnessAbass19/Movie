@@ -1,11 +1,12 @@
 "use client";
 
-import { TVShowData } from "@/types";
+import { TVShowData, TvGenre } from "@/types";
 import requests from "@/utils/Request";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Paginations from "../components/search/pagination";
 import TvShowCard from "../components/UI/TvShowCard";
+import { CheckboxReactHookFormMultiple } from "../components/layouts/Filter";
 
 const page = ({ searchParams }: { searchParams: { page: string } }) => {
   const movies = async () => {
@@ -45,9 +46,12 @@ const page = ({ searchParams }: { searchParams: { page: string } }) => {
   return (
     <div className="max-w-screen-2xl mx-auto px-5 py-10">
       <div className="grid items-center justify-center space-y-10">
-        <h1 className="text-2xl md:text-4xl font-bold capitalize">
-          Popular TV shows
-        </h1>
+        <div className="flex justify-between items-center">
+          <h1 className="text-2xl md:text-4xl font-bold capitalize">
+            Popular TV shows
+          </h1>
+          <CheckboxReactHookFormMultiple genres={TvGenre} link="/tv" />
+        </div>
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-y-10 gap-x-5">
           {data?.results.map((item) => (
             <TvShowCard key={item.id} movie={item} />

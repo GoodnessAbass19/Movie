@@ -53,29 +53,23 @@ const page = ({
 
   return (
     <div className="max-w-screen-2xl mx-auto px-5 py-10">
-      {searchParams.genre ? (
-        <MovieFilter />
-      ) : (
-        <div>
-          <div className="grid items-center justify-center space-y-10">
-            <div className="flex justify-between items-center">
-              <h1 className="text-2xl md:text-4xl font-bold capitalize">
-                popular movies
-              </h1>
-              <CheckboxReactHookFormMultiple genres={genres} link="/movies" />
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-y-10 gap-x-5">
-              {data?.results.map((item) => (
-                <MovieCard key={item.id} movie={item} />
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-10">
-            <Paginations total={data?.total_pages} link="/movies?" />
-          </div>
+      <div className="grid items-center justify-center space-y-10">
+        <div className="flex justify-between items-center">
+          <h1 className="text-2xl md:text-4xl font-bold capitalize">
+            popular movies
+          </h1>
+          <CheckboxReactHookFormMultiple genres={genres} link="/movies" />
         </div>
-      )}
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-y-10 gap-x-5">
+          {data?.results.map((item) => (
+            <MovieCard key={item.id} movie={item} />
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-10">
+        <Paginations total={data?.total_pages} link="/movies?" />
+      </div>
     </div>
   );
 };

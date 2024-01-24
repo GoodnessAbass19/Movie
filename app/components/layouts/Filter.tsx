@@ -128,7 +128,7 @@ export function CheckboxReactHookFormMultiple({
     const genreIds = data.genres; // Extract the genre IDs directly
     const values = { input: genreIds }; // Create the values object
     const inputValuesString = Object.values(values.input).join(","); // Join IDs as comma-separated string
-    router.push(`${link}?genre=${inputValuesString}`, { scroll: true });
+    router.push(`${link}/filter?genre=${inputValuesString}`, { scroll: true });
     router.refresh();
     form.reset();
   }
