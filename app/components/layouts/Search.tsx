@@ -32,6 +32,11 @@ function SearchInput() {
     router.refresh();
     form.reset();
   }
+  input: {
+    ("28");
+    ("16");
+    ("12");
+  }
 
   return (
     <Form {...form}>

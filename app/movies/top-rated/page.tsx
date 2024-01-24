@@ -1,8 +1,9 @@
 "use client";
 
 import MovieCard from "@/app/components/UI/MovieCard";
+import { CheckboxReactHookFormMultiple } from "@/app/components/layouts/Filter";
 import Paginations from "@/app/components/search/pagination";
-import { MovieData } from "@/types";
+import { MovieData, genres } from "@/types";
 import requests from "@/utils/Request";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -38,7 +39,7 @@ const page = ({ searchParams }: { searchParams: { page: string } }) => {
           .map((item, idx) => (
             <div
               key={idx}
-              className="animate-pulse lg:h-[180px] h-[150px] col-span-1 sm:col-span-1 lg:col-span-1 bg-[#312e81]"
+              className="animate-pulse lg:h-[300px] h-[300px] col-span-1 sm:col-span-1 lg:col-span-1 bg-[#312e81]"
             />
           ))}
       </div>
@@ -48,9 +49,12 @@ const page = ({ searchParams }: { searchParams: { page: string } }) => {
   return (
     <div className="max-w-screen-2xl mx-auto px-5 py-10">
       <div className="grid items-center justify-center space-y-10">
-        <h1 className="text-2xl md:text-4xl font-bold capitalize">
-          top rated Movies
-        </h1>
+        <div className="flex justify-between items-center">
+          <h1 className="text-2xl md:text-4xl font-bold capitalize">
+            top rated Movies
+          </h1>
+          <CheckboxReactHookFormMultiple genres={genres} link="/movies" />
+        </div>
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-y-10 gap-x-5">
           {data?.results.map((item) => (
             <MovieCard key={item.id} movie={item} />

@@ -1,23 +1,28 @@
 "use client";
 
-import TvShowCard from "@/app/components/UI/TvShowCard";
-import Paginations from "@/app/components/search/pagination";
-import { MovieData, TVShowData } from "@/types";
+import { MovieData, genres } from "@/types";
 import requests from "@/utils/Request";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useSearchParams } from "next/navigation";
+import MovieCard from "./MovieCard";
+import Paginations from "../search/pagination";
+import { CheckboxReactHookFormMultiple } from "../layouts/Filter";
 
-const page = ({ searchParams }: { searchParams: { page: string } }) => {
+const MovieFilter = () => {
+  const page = useSearchParams();
+  const note = page.get("page");
+  const genre = page.get("genre");
   const movies = async () => {
     const res = await axios.get(
-      `${requests.fetchOnAirTv}&include_adult=false&language=en-US&page=${
-        searchParams.page || 1
-      }`
+      `${requests.fetchFilterMovies}&include_adult=false&language=en-US&page=${
+        note || "1"
+      }&with_genres=${genre}`
     );
     return res.data;
   };
-  const { data, error, isFetching } = useQuery<TVShowData>({
-    queryKey: ["onAir-tv-show", searchParams.page],
+  const { data, error, isFetching } = useQuery<MovieData>({
+    queryKey: ["movies-filter", note, genre],
     queryFn: movies,
     staleTime: 500000, // Keep cached data indefinitely
   });
@@ -43,23 +48,29 @@ const page = ({ searchParams }: { searchParams: { page: string } }) => {
   }
 
   return (
-    <div className="max-w-screen-2xl mx-auto px-5 py-10">
+    <div>
       <div className="grid items-center justify-center space-y-10">
-        <h1 className="text-2xl md:text-4xl font-bold capitalize">
-          Currently Airing TV Shows
-        </h1>
+        <div className="flex justify-between items-center">
+          <h1 className="text-2xl md:text-4xl font-bold capitalize">
+            Filter result
+          </h1>
+          <CheckboxReactHookFormMultiple genres={genres} link="/movies" />
+        </div>
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-y-10 gap-x-5">
           {data?.results.map((item) => (
-            <TvShowCard key={item.id} movie={item} />
+            <MovieCard key={item.id} movie={item} />
           ))}
         </div>
       </div>
 
       <div className="mt-10">
-        <Paginations total={data?.total_pages} link="/tv/on-air?" />
+        <Paginations
+          total={data?.total_pages}
+          link={`/movies?genre=${genre}&`}
+        />
       </div>
     </div>
   );
 };
 
-export default page;
+export default MovieFilter;

@@ -15,6 +15,7 @@ const requests = {
   fetchTopRatedTv: `https://api.themoviedb.org/3/tv/top_rated?api_key=${API_KEY}`,
   fetchOnAirTv: `https://api.themoviedb.org/3/tv/on_the_air?api_key=${API_KEY}`,
   fetchNetflixOriginals: `/discover/tv?api_key=${API_KEY}&with_networks=213`,
+  fetchFilterMovies: `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&sort_by=popularity.desc`,
 
   // fetchTopRated: `/movie/top_rated?api_key=${API_KEY}&language=en-US`,
   // fetchActionMovies: `/discover/movie?api_key=${API_KEY}&with_genres=28`,
