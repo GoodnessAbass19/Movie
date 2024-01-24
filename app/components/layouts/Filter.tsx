@@ -18,6 +18,7 @@ import {
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useRouter } from "next/navigation";
@@ -154,7 +155,7 @@ export function CheckboxReactHookFormMultiple({
               control={form.control}
               name="genres"
               render={() => (
-                <FormItem className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-y-5 gap-x-3">
+                <FormItem className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-y-5 gap-x-3 items-center">
                   {genres.map((item) => (
                     <FormField
                       key={item.id}
@@ -192,7 +193,9 @@ export function CheckboxReactHookFormMultiple({
                 </FormItem>
               )}
             />
-            <Button type="submit">Filter</Button>
+            <DropdownMenuItem>
+              <Button type="submit">Filter</Button>
+            </DropdownMenuItem>
           </form>
         </Form>
       </DropdownMenuContent>

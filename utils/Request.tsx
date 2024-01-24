@@ -1,4 +1,4 @@
-const API_KEY = "a6a239075f2d88a7adbd9adec3b60023";
+export const API_KEY = "a6a239075f2d88a7adbd9adec3b60023";
 
 const requests = {
   fetchLatestMovies: `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}`,
