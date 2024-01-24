@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
-
-import { SunIcon, MoonIcon } from "@heroicons/react/24/solid";
+import SunIcon from "../UI/SunIcon";
+import MoonIcon from "../UI/MoonIcon";
 
 const ThemeButton = () => {
   const { resolvedTheme, setTheme } = useTheme();

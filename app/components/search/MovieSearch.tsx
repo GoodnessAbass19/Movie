@@ -22,7 +22,7 @@ const MovieSearch = () => {
   const { data, error, isFetching } = useQuery<MovieData>({
     queryKey: ["search-movies", search, page],
     queryFn: movies,
-    staleTime: 5000, // Keep cached data indefinitely
+    staleTime: 500000, // Keep cached data indefinitely
   });
 
   if (error) {

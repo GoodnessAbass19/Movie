@@ -32,13 +32,13 @@ const page = ({ searchParams }: { searchParams: { page: string } }) => {
       //   <div className="min-h-screen flex flex-col justify-center items-center">
       //     Loading.....
       //   </div>
-      <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-y-10 gap-x-5 max-w-screen-2xl mx-auto">
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-y-10 gap-x-5 max-w-screen-2xl mx-auto">
         {Array(20)
           .fill(1)
           .map((item, idx) => (
             <div
               key={idx}
-              className="animate-pulse lg:h-[300px] h-[300px] col-span-1 sm:col-span-1 lg:col-span-1 bg-[#312e81]"
+              className="animate-pulse lg:h-[180px] h-[150px] col-span-1 sm:col-span-1 lg:col-span-1 bg-[#312e81]"
             />
           ))}
       </div>
@@ -51,7 +51,7 @@ const page = ({ searchParams }: { searchParams: { page: string } }) => {
         <h1 className="text-2xl md:text-4xl font-bold capitalize">
           top rated Movies
         </h1>
-        <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-y-10 gap-x-5">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-y-10 gap-x-5">
           {data?.results.map((item) => (
             <MovieCard key={item.id} movie={item} />
           ))}

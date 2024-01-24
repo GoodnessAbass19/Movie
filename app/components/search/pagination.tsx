@@ -28,7 +28,7 @@ const Paginations = ({
 
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
-    router.push(`${link}page=${newPage}`);
+    router.push(`${link}page=${newPage}`, { scroll: true });
   };
 
   const renderPaginationButtons = () => {
