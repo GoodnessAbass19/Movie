@@ -1,5 +1,5 @@
 import MovieDetails from "@/app/components/UI/MovieDetails";
-import Similar from "@/app/components/UI/SimilarMovies";
+import SimilarMovies from "@/app/components/UI/SimilarMovies";
 
 type Props = {
   params: {
@@ -12,7 +12,7 @@ const page = ({ params }: Props) => {
   return (
     <div>
       <MovieDetails slug={slug} />
-      <Similar slug={`https://api.themoviedb.org/3/movie/${slug}`} />
+      <SimilarMovies slug={`https://api.themoviedb.org/3/movie/${slug}`} />
     </div>
   );
 };
