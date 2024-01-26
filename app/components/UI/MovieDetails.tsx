@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client";
 
 import { SingleMovieData } from "@/types";
@@ -14,12 +15,15 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import StarIcon from "./StarIcon";
+import Videos from "./Videos";
+import Images from "./Images";
+import Cast from "./Cast";
 
 const MovieDetails = ({ slug }: { slug: string }) => {
   const imagePath = "https://image.tmdb.org/t/p/original";
   const movies = async () => {
     const res = await axios.get(
-      `https://api.themoviedb.org/3/movie/${slug}?api_key=${API_KEY}&append_to_response=images`
+      `https://api.themoviedb.org/3/movie/${slug}?api_key=${API_KEY}&append_to_response=images,credits`
     );
     return res.data;
   };
@@ -31,8 +35,20 @@ const MovieDetails = ({ slug }: { slug: string }) => {
 
   if (error) {
     console.log(error);
-    return <div>there was an error</div>;
+    return (
+      <div className="text-center min-h-screen flex flex-col w-full h-full justify-center items-center">
+        there was an error
+      </div>
+    );
   }
+  if (isFetching) {
+    return (
+      <div className="min-h-screen w-full flex flex-col justify-center items-center h-full">
+        <span className="capitalize font-semibold text-center">loading...</span>
+      </div>
+    );
+  }
+
   const inputDates = data?.release_date || "";
   const year = inputDates.split("-")[0];
   const inputDate = data?.release_date || "";
@@ -41,7 +57,7 @@ const MovieDetails = ({ slug }: { slug: string }) => {
   // Rearrange the parts in the desired format
   const formattedDate = `${parts[1]}/${parts[2]}/${parts[0]}`;
 
-  let number = data?.vote_average || 50;
+  let number = data?.vote_average || 5.0;
   let maximumValue = 10;
   let percentage = (number / maximumValue) * 100;
   percentage = Math.max(1, Math.min(percentage, 100));
@@ -49,14 +65,18 @@ const MovieDetails = ({ slug }: { slug: string }) => {
   const values = data?.genres;
   const concatenatedGenres = values
     ?.map((genre) => (
-      <Link key={genre.id} href={`/movies/filter?genre=${genre.id}`}>
+      <Link
+        key={genre.id}
+        href={`/movies/filter?genre=${genre.id}`}
+        className="text-base font-medium hover:text-white/75"
+      >
         {genre.name}
       </Link>
     ))
     .reduce((prev: React.ReactNode, curr: React.ReactNode) => (
       <>
         {prev}
-        {","}
+        {"."}
         {curr}
       </>
     ));
@@ -74,15 +94,16 @@ const MovieDetails = ({ slug }: { slug: string }) => {
 
   return (
     <div>
-      {" "}
       <div
         style={{ backgroundImage: `url(${imagePath + data?.backdrop_path})` }}
-        className="bg-cover bg-right-top bg-no-repeat flex flex-col w-full min-h-[70vh] justify-center items-center"
+        className="bg-cover bg-right-top bg-no-repeat flex flex-col w-full min-h-[70vh] justify-center items-center text-white"
       >
-        <div className=" bg-black/30 w-full min-h-[70vh]"></div>
+        <div className=" bg-black/60 w-full min-h-[70vh]"></div>
         <div className="max-w-screen-2xl mx-auto absolute grid grid-rows-3 grid-flow-col gap-5 justify-between items-center mt-20 px-5">
           <div className="row-span-3 relative rounded-md mb-8">
-            <div>{/* <Images pics={data?.images.posters} /> */}</div>
+            <div>
+              <Images pics={data?.images.posters} />
+            </div>
             <Image
               src={imagePath + data?.poster_path}
               width={1000}
@@ -107,32 +128,22 @@ const MovieDetails = ({ slug }: { slug: string }) => {
                 {"  :"}
               </h4>
               <h4 className="text-lg font-semibold flex">
-                {/* {data?.genres.slice(0, 3).map((item, i) => (
-                  <div key={i}>
-                    <h4 className="after:content-[',']">{item.name}</h4>
-                  </div>
-                ))}
-                {/* {data?.genres[2].name} */}
-
                 {concatenatedGenres}
                 {" :"}
               </h4>
-              <h4 className="text-lg font-semibold">
+              <h4 className="text-xl font-semibold">
                 {toHoursAndMinutes(data?.runtime || 60)}
               </h4>
             </div>
-            <p className="text-xl font-normal font-montserrat text-white">
-              {data?.tagline}{" "}
-            </p>
 
             <div className="flex gap-5 items-center">
               <div className="flex items-center gap-1">
                 <div className="bg-black/70 rounded-full w-16 h-16 flex items-center justify-center">
                   <div
                     style={{
-                      background: `conic-gradient(#eab308 ${result},#a3a3a3 ${result})`,
+                      background: `conic-gradient(#eab308 ${result},rgb(234 179 8 / 0.5) ${result})`,
                     }}
-                    className="w-14 h-14 flex items-center justify-center rounded-full"
+                    className={`w-14 h-14 flex items-center justify-center rounded-full`}
                   >
                     <div className="text-xl  w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center group-hover:text-cyan-600">
                       <span className="inline-block text-lg text-white">
@@ -142,7 +153,7 @@ const MovieDetails = ({ slug }: { slug: string }) => {
                   </div>
                 </div>
                 <span className="inline-block text-lg capitalize font-semibold">
-                  user's rating
+                  viewer's rating
                 </span>
               </div>
               <div>
@@ -150,7 +161,10 @@ const MovieDetails = ({ slug }: { slug: string }) => {
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
-                        <Button variant="outline">
+                        <Button
+                          variant="outline"
+                          className="bg-black outline-black"
+                        >
                           <StarIcon className="text-yellow-500 w-5 h-5" />
                         </Button>
                       </TooltipTrigger>
@@ -163,7 +177,10 @@ const MovieDetails = ({ slug }: { slug: string }) => {
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
-                        <Button variant="outline">
+                        <Button
+                          variant="outline"
+                          className="bg-black outline-black"
+                        >
                           <StarIcon className="text-yellow-500 w-5 h-5" />
                         </Button>
                       </TooltipTrigger>
@@ -174,45 +191,34 @@ const MovieDetails = ({ slug }: { slug: string }) => {
                   </TooltipProvider>
                 )}
               </div>
-              {/* <Video movies={films} /> */}
-              <h3 className="bg-green-500 font-semibold text-white rounded-md p-1.5">
-                {data?.status}
-              </h3>
-              <button className="text-xl font-semibold capitalize bg-green-500 p-2 text-white rounded-md">
-                <Link href={`https://www.imdb.com/title/${data?.imdb_id}`}>
-                  check on imdb
-                </Link>
-              </button>
+              <Videos slug={`https://api.themoviedb.org/3/movie/${slug}`} />
             </div>
+
+            <p className="text-lg font-normal font-montserrat text-white/80">
+              {data?.tagline}{" "}
+            </p>
           </div>
           <div className="row-span-2 col-span-2 xl:space-y-5 pb-10">
             <div className="xl:gap-2.5 gap-1.5 grid">
               <h2 className="text-2xl font-semibold">Overview</h2>
               <p className="text-base font-semibold">{data?.overview}</p>
             </div>
-            {/* <div className="flex justify-between items-center flex-wrap">
-              {req.cast.slice(0, 3).map((item) => (
-                <div key={item.id}>
-                  <h3 className="text-xl font-semibold">{item.name}</h3>
-                  <p className="text-lg font-normal font-montserrat text-gray-400">
-                    character
-                  </p>
-                </div>
-              ))}
-            </div> */}
-            {/* <div className="flex justify-between items-center flex-wrap">
-              {req.crew.slice(0, 3).map((item) => (
-                <div key={item.id}>
-                  <h3 className="text-xl font-semibold">{item.name}</h3>
-                  <p className="text-lg font-normal font-montserrat text-gray-400">
+
+            <div className="flex justify-between items-center flex-wrap">
+              {data?.credits.crew.slice(0, 3).map((item) => (
+                <div key={item.id} className="text-start">
+                  <h3 className="text-base font-semibold">{item.name}</h3>
+                  <p className="text-sm font-normal font-montserrat text-white">
                     {item.job}
                   </p>
                 </div>
               ))}
-            </div> */}
+            </div>
           </div>
         </div>
       </div>
+
+      <Cast cast={data?.credits} />
     </div>
   );
 };
