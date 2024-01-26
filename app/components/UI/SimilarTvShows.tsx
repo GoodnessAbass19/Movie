@@ -3,21 +3,21 @@
 import { API_KEY } from "@/utils/Request";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { MovieData } from "@/types";
+import { TVShowData } from "@/types";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Scrollbar } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/scrollbar";
 import "swiper/css/free-mode";
-import MovieCard from "./MovieCard";
+import TvShowCard from "./TvShowCard";
 
-const Similar = ({ slug }: { slug: string }) => {
+const SimilarTvShow = ({ slug }: { slug: string }) => {
   const movies = async () => {
     const res = await axios.get(`${slug}/similar?api_key=${API_KEY}`);
     return res.data;
   };
-  const { data, error, isFetching } = useQuery<MovieData>({
-    queryKey: ["similar", slug],
+  const { data, error, isFetching } = useQuery<TVShowData>({
+    queryKey: ["similar-movie", slug],
     queryFn: movies,
     staleTime: 500000, // Keep cached data indefinitely
   });
@@ -81,7 +81,7 @@ const Similar = ({ slug }: { slug: string }) => {
       >
         {data?.results.map((item) => (
           <SwiperSlide key={item.id} className="mb-5">
-            <MovieCard key={item.id} movie={item} />
+            <TvShowCard key={item.id} movie={item} />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -95,4 +95,4 @@ const Similar = ({ slug }: { slug: string }) => {
   );
 };
 
-export default Similar;
+export default SimilarTvShow;

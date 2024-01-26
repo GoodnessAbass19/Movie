@@ -1,6 +1,5 @@
 import MovieDetails from "@/app/components/UI/MovieDetails";
-import Similar from "@/app/components/UI/Similar";
-import React from "react";
+import Similar from "@/app/components/UI/SimilarMovies";
 
 type Props = {
   params: {

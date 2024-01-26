@@ -1,4 +1,4 @@
-import Details from "@/app/components/UI/MovieDetails";
+import SimilarTvShow from "@/app/components/UI/SimilarTvShows";
 import TvDetails from "@/app/components/UI/TvDetails";
 
 type Props = {
@@ -13,6 +13,7 @@ const page = ({ params }: Props) => {
   return (
     <div>
       <TvDetails slug={slug} />
+      <SimilarTvShow slug={`https://api.themoviedb.org/3/tv/${slug}`} />
     </div>
   );
 };

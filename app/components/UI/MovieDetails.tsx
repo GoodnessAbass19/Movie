@@ -55,7 +55,7 @@ const MovieDetails = ({ slug }: { slug: string }) => {
   const parts = inputDate?.split("-"); // Split the input date by hyphens
 
   // Rearrange the parts in the desired format
-  const formattedDate = `${parts[1]}/${parts[2]}/${parts[0]}`;
+  const formattedDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
 
   let number = data?.vote_average || 5.0;
   let maximumValue = 10;
@@ -92,6 +92,14 @@ const MovieDetails = ({ slug }: { slug: string }) => {
     return num.toString().padStart(2);
   }
 
+  const getImagePath = (imagePath?: string, fullSize?: boolean) => {
+    return imagePath
+      ? `http://image.tmdb.org/t/p/${
+          fullSize ? "original" : "w500"
+        }/${imagePath}`
+      : "https://links.papareact.com/o8z";
+  };
+
   return (
     <div>
       <div
@@ -124,7 +132,7 @@ const MovieDetails = ({ slug }: { slug: string }) => {
             <div className="flex flex-wrap gap-2.5">
               <h4 className="text-base font-medium">
                 {formattedDate}
-                <span>({data?.production_countries[0].iso_3166_1})</span>{" "}
+                <span>({data?.production_countries[0]?.iso_3166_1})</span>{" "}
                 {"  :"}
               </h4>
               <h4 className="text-lg font-semibold flex">
@@ -219,6 +227,28 @@ const MovieDetails = ({ slug }: { slug: string }) => {
       </div>
 
       <Cast cast={data?.credits} />
+
+      <div className="bg-white w-full mt-10">
+        <h3 className="text-3xl font-semibold text-black text-center">
+          <span className="border-b-4 border-black">Production</span>
+        </h3>
+        <div className="flex flex-wrap justify-center items-center py-5 gap-10">
+          {data?.production_companies.map((item) => (
+            <div key={item.id}>
+              <Image
+                src={getImagePath(item.logo_path)}
+                alt={item.id}
+                width={600}
+                height={600}
+                className="max-w-[200px] object-contain"
+              />
+              <p className="text-center p-3 text-black text-xl font-semibold">
+                {item.name}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

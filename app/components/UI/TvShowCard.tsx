@@ -23,7 +23,7 @@ const TvShowCard = ({ movie }: { movie: TVShow }) => {
           src={getImagePath(movie.poster_path)}
           alt={movie.name}
           width={500}
-          height={300}
+          height={500}
           className="w-full h-full rounded-md"
           priority
           blurDataURL={getImagePath(movie.poster_path)}

@@ -21,7 +21,6 @@ const Videos = ({ slug }: { slug: string }) => {
   });
 
   if (error) {
-    console.log(error);
     return <div>there was an error</div>;
   }
 
