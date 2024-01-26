@@ -28,8 +28,12 @@ const Cast = ({ cast }: { cast: credits }) => {
         slidesPerView={2}
         spaceBetween={20}
         breakpoints={{
-          1024: {
+          1280: {
             slidesPerView: 7,
+            spaceBetween: 20,
+          },
+          1024: {
+            slidesPerView: 5,
             spaceBetween: 20,
           },
           912: {
@@ -56,7 +60,7 @@ const Cast = ({ cast }: { cast: credits }) => {
         {cast.cast.slice(0, 14).map((item) => (
           <SwiperSlide
             key={item.id}
-            className="rounded-md dark:bg-white bg-black items-center dark:text-black text-white mb-5 max-h-[300px]"
+            className="rounded-md dark:bg-white bg-black items-center dark:text-black text-white mb-5 max-h-[250px] xl:max-h-[300px]"
           >
             <div>
               <Image
@@ -65,9 +69,9 @@ const Cast = ({ cast }: { cast: credits }) => {
                 height={500}
                 priority
                 alt={item.name}
-                className="w-full h-[200px] object-cover"
+                className="w-full h-[180px] xl:h-[200px] object-cover"
               />
-              <div className="text-start h-[100px] p-2">
+              <div className="text-start h-[80px] xl:h-[100px] xl:p-2 p-1">
                 <h4 className="text-base font-semibold">{item.name}</h4>
                 <p className="text-sm p-1.5 inline-block font-semibold">
                   {item.character}
