@@ -27,8 +27,8 @@ const Images = ({ pics }: { pics: any }) => {
       </button>
 
       {image && (
-        <div className="fixed bg-black/60 z-[999] w-full h-screen top-0 left-0">
-          <div className="relative  justify-center items-center rounded-md p-5  border-md md:max-w-screen-md max-w-xs mx-auto right-10 w-full h-full xl:inset-y-20">
+        <div className="fixed bg-black/60 z-[999] w-full h-full min-h-screen top-0 left-0">
+          <div className="relative  justify-center items-center rounded-md p-5  border-md md:max-w-screen-md max-w-xs mx-auto w-full h-full xl:inset-y-20">
             <div className="flex justify-end items-end">
               <button onClick={() => setImage(false)} className="text-white">
                 {" "}

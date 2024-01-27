@@ -51,7 +51,7 @@ const TvDetails = ({ slug }: { slug: string }) => {
 
   const inputDates = data?.first_air_date || "";
   const year = inputDates.split("-")[0];
-  const inputDate = data?.last_air_date || "";
+  const inputDate = data?.first_air_date || "";
   const parts = inputDate?.split("-"); // Split the input date by hyphens
 
   // Rearrange the parts in the desired format
@@ -67,7 +67,7 @@ const TvDetails = ({ slug }: { slug: string }) => {
     ?.map((genre) => (
       <Link
         key={genre.id}
-        href={`/movies/filter?genre=${genre.id}`}
+        href={`/tv/filter?genre=${genre.id}`}
         className="text-base font-medium hover:text-white/75"
       >
         {genre.name}
@@ -106,7 +106,7 @@ const TvDetails = ({ slug }: { slug: string }) => {
         style={{ backgroundImage: `url(${imagePath + data?.backdrop_path})` }}
         className="bg-cover bg-right-top bg-no-repeat flex flex-col w-full min-h-[70vh] justify-center items-center text-white"
       >
-        <div className=" bg-black/60 w-full min-h-[70vh]"></div>
+        <div className=" bg-black/30 w-full min-h-[70vh]"></div>
         <div className="max-w-screen-2xl mx-auto absolute grid grid-rows-3 grid-flow-col gap-5 justify-between items-center mt-20 px-5">
           <div className="row-span-3 relative rounded-md mb-8">
             <div>
@@ -147,25 +147,40 @@ const TvDetails = ({ slug }: { slug: string }) => {
             <div className="flex gap-5 items-center">
               <div className="flex items-center gap-1">
                 <div className="bg-black/70 rounded-full w-16 h-16 flex items-center justify-center">
-                  <div
-                    style={{
-                      background: `conic-gradient(#eab308 ${result},rgb(234 179 8 / 0.5) ${result})`,
-                    }}
-                    className={`w-14 h-14 flex items-center justify-center rounded-full`}
-                  >
-                    <div className="text-xl  w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center group-hover:text-cyan-600">
-                      <span className="inline-block text-lg text-white">
-                        {result}
-                      </span>
+                  {number > 6.9 ? (
+                    <div
+                      style={{
+                        background: `conic-gradient(#22c55e ${result},rgb(234 179 8 / 0.5) ${result})`,
+                      }}
+                      className={`w-14 h-14 flex items-center justify-center rounded-full`}
+                    >
+                      <div className="text-xl  w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center group-hover:text-cyan-600">
+                        <span className="inline-block text-lg text-white">
+                          {result}
+                        </span>
+                      </div>
                     </div>
-                  </div>
+                  ) : (
+                    <div
+                      style={{
+                        background: `conic-gradient(#eab308 ${result},rgb(234 179 8 / 0.5) ${result})`,
+                      }}
+                      className={`w-14 h-14 flex items-center justify-center rounded-full`}
+                    >
+                      <div className="text-xl  w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center group-hover:text-cyan-600">
+                        <span className="inline-block text-lg text-white">
+                          {result}
+                        </span>
+                      </div>
+                    </div>
+                  )}
                 </div>
                 <span className="inline-block text-lg capitalize font-semibold">
                   viewer's rating
                 </span>
               </div>
               <div>
-                {result || number > 6.0 ? (
+                {number > 6.0 ? (
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
@@ -189,7 +204,7 @@ const TvDetails = ({ slug }: { slug: string }) => {
                           variant="outline"
                           className="bg-black outline-black"
                         >
-                          <StarIcon className="text-yellow-500 w-5 h-5" />
+                          <StarIcon className="w-5 h-5" />
                         </Button>
                       </TooltipTrigger>
                       <TooltipContent>

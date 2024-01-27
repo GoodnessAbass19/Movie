@@ -29,13 +29,13 @@ const SimilarMovies = ({ slug }: { slug: string }) => {
 
   if (isFetching) {
     return (
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-y-10 gap-x-5 max-w-screen-2xl mx-auto">
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-y-10 gap-x-5 max-w-screen-2xl mx-auto px-5">
         {Array(7)
           .fill(1)
           .map((item, idx) => (
             <div
               key={idx}
-              className="animate-pulse lg:h-[300px] h-[300px] col-span-1 sm:col-span-1 lg:col-span-1 bg-[#312e81]"
+              className="animate-pulse lg:h-[180px] h-[150px] col-span-1 sm:col-span-1 lg:col-span-1 bg-[#312e81]"
             />
           ))}
       </div>
@@ -43,9 +43,9 @@ const SimilarMovies = ({ slug }: { slug: string }) => {
   }
 
   return (
-    <div className="my-20 space-y-4 max-w-screen-2xl mx-auto">
+    <div className="my-20 space-y-4 max-w-screen-2xl mx-auto px-5">
       <h2 className="capitalize text-2xl font-semibold">you may also like</h2>
-      <Swiper
+      {/* <Swiper
         scrollbar={{
           draggable: true,
           snapOnRelease: true,
@@ -84,13 +84,13 @@ const SimilarMovies = ({ slug }: { slug: string }) => {
             <MovieCard key={item.id} movie={item} />
           </SwiperSlide>
         ))}
-      </Swiper>
+      </Swiper> */}
 
-      {/* <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-y-10 gap-x-4">
-        {data?.results.slice(0, 14).map((item) => (
+      <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8 gap-y-10 gap-x-4">
+        {data?.results.slice(0, 16).map((item) => (
           <MovieCard key={item.id} movie={item} />
         ))}
-      </div> */}
+      </div>
     </div>
   );
 };

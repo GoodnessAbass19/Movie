@@ -69,7 +69,7 @@ const Cast = ({ cast }: { cast: credits }) => {
                 height={500}
                 priority
                 alt={item.name}
-                className="w-full h-[180px] xl:h-[200px] object-cover"
+                className="w-full h-[180px] xl:h-[200px] object-cover rounded-t-md"
               />
               <div className="text-start h-[80px] xl:h-[100px] xl:p-2 p-1">
                 <h4 className="text-base font-semibold">{item.name}</h4>

@@ -42,7 +42,7 @@ const PopularMovies = () => {
           .map((item, idx) => (
             <div
               key={idx}
-              className="animate-pulse lg:h-[300px] h-[300px] col-span-1 sm:col-span-1 lg:col-span-1 bg-[#312e81]"
+              className="animate-pulse lg:h-[180px] h-[150px] col-span-1 sm:col-span-1 lg:col-span-1 bg-[#312e81]"
             />
           ))}
       </div>
