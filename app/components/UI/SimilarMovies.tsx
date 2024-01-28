@@ -30,7 +30,7 @@ const SimilarMovies = ({ slug }: { slug: string }) => {
   if (isFetching) {
     return (
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-y-10 gap-x-5 max-w-screen-2xl mx-auto px-5">
-        {Array(7)
+        {Array(20)
           .fill(1)
           .map((item, idx) => (
             <div
