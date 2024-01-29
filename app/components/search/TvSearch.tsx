@@ -44,12 +44,12 @@ const TvSearch = () => {
   return (
     <div className="grid gap-y-5">
       {/* <h2 className="text-xl font-bold py-2 capitalize">Tv shows</h2> */}
-      
+
       <div className="grid gap-y-10 gap-x-5 ">
         {data?.results.map((item) => (
           <div key={item.id} className="flex items-center gap-x-5">
             <Link
-              href={`/tv/${item.id}`}
+              href={`/tv/${item.id}-${item.name}`}
               className="flex-shrink-0 relative cursor-pointer transform hover:scale-105 transition duration-200 ease-out hover:drop-shadow-lg"
             >
               <div className="absolute inset-0 bg-gradient-to-b from-gray-200/0 via-gray-900/10 to-gray-300 dark:to-black/80 z-10" />

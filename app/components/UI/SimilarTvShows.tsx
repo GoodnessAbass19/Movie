@@ -44,53 +44,19 @@ const SimilarTvShow = ({ slug }: { slug: string }) => {
 
   return (
     <div className="my-20 space-y-4 max-w-screen-2xl mx-auto">
-      <h2 className="capitalize text-2xl font-semibold">you may also like</h2>
-      {/* <Swiper
-        scrollbar={{
-          draggable: true,
-          snapOnRelease: true,
-          dragSize: 100,
-          hide: false,
-        }}
-        slidesPerView={2.5}
-        spaceBetween={20}
-        breakpoints={{
-          1024: {
-            slidesPerView: 7,
-            spaceBetween: 20,
-          },
-          912: {
-            slidesPerView: 5,
-            spaceBetween: 20,
-          },
-          768: {
-            slidesPerView: 4,
-            spaceBetween: 20,
-          },
-          500: {
-            slidesPerView: 3,
-            spaceBetween: 20,
-          },
-        }}
-        freeMode={true}
-        keyboard={{
-          enabled: true,
-        }}
-        modules={[Scrollbar, FreeMode]}
-        className="mx-auto md:py-10 py-5 mySwiper"
-      >
-        {data?.results.map((item) => (
-          <SwiperSlide key={item.id} className="mb-5">
-            <TvShowCard key={item.id} movie={item} />
-          </SwiperSlide>
-        ))}
-      </Swiper> */}
+      {data?.results.length ? (
+        <>
+          <h2 className="capitalize text-2xl font-semibold">
+            you may also like
+          </h2>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8 gap-y-10 gap-x-4">
-        {data?.results.slice(0, 16).map((item) => (
-          <TvShowCard key={item.id} movie={item} />
-        ))}
-      </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8 gap-y-10 gap-x-4">
+            {data?.results.slice(0, 16).map((item) => (
+              <TvShowCard key={item.id} movie={item} />
+            ))}
+          </div>
+        </>
+      ) : null}
     </div>
   );
 };

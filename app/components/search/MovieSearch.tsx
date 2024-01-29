@@ -53,7 +53,7 @@ const MovieSearch = () => {
         {data?.results.map((item) => (
           <div key={item.id} className="flex items-center gap-x-5">
             <Link
-              href={`/movies/${item.id}`}
+              href={`/movies/${item.id}-${item.title}`}
               className="flex-shrink-0 relative cursor-pointer transform hover:scale-105 transition duration-200 ease-out hover:drop-shadow-lg"
             >
               <div className="absolute inset-0 bg-gradient-to-b from-gray-200/0 via-gray-900/10 to-gray-300 dark:to-black/80 z-10" />

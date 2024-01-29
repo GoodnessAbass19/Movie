@@ -6,6 +6,13 @@ import requests, { API_KEY } from "@/utils/Request";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { SingleMovieData, VideoData } from "@/types";
+import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const Videos = ({ slug }: { slug: string }) => {
   const [trailer, setTrailer] = useState(false);
@@ -26,13 +33,24 @@ const Videos = ({ slug }: { slug: string }) => {
 
   return (
     <div>
-      <button
-        onClick={() => setTrailer(!trailer)}
-        className="text-lg font-semibold capitalize text-white hover:text-white/75 items-center justify-center flex"
-      >
-        <PlayIcon className="w-5 h-5 inline-block pr-1" />
-        play Trailer
-      </button>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <button
+              onClick={() => setTrailer(!trailer)}
+              disabled={data?.results.length === 0}
+              className="text-lg font-semibold capitalize text-white disabled:text-white/75 hover:text-white/75 items-center justify-center flex"
+            >
+              <PlayIcon className="w-5 h-5 inline-block pr-1" />
+              play Trailer
+            </button>
+          </TooltipTrigger>
+          <TooltipContent>
+            {data?.results.length ? "Trailer" : "Trailer unavailable"}
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+
       {trailer && (
         // <div className="fixed bg-gray-500/80 w-full min-h-screen top-0 left-0 z-[999]">
         //   <div className="relative justify-center items-center rounded-md p-5 border-md lg:max-w-screen-md md:max-w-screen-lg xl:right-10 xl:max-w-screen-xl mx-auto w-full h-full inset-y-0 xl:top-20 lg:top-20 top-1/4">
