@@ -242,27 +242,30 @@ const MovieDetails = ({ slug }: { slug: string }) => {
       </div>
 
       <Cast cast={data?.credits} />
-
-      <div className="bg-white w-full mt-10">
-        <h3 className="text-3xl font-semibold text-black text-center">
-          <span className="border-b-4 border-black">Production</span>
-        </h3>
-        <div className="flex flex-wrap justify-center items-center py-5 gap-10">
-          {data?.production_companies.map((item) => (
-            <div key={item.id}>
-              <Image
-                src={getImagePath(item.logo_path)}
-                alt={item.id}
-                width={600}
-                height={600}
-                className="max-w-[200px] object-contain"
-              />
-              <p className="text-center p-3 text-black text-xl font-semibold">
-                {item.name}
-              </p>
+      <div>
+        {data?.production_companies.length && (
+          <div className="bg-white w-full mt-10">
+            <h3 className="text-3xl font-semibold text-black text-center">
+              <span className="border-b-4 border-black">Production</span>
+            </h3>
+            <div className="flex flex-wrap justify-center items-center py-5 gap-10">
+              {data?.production_companies.map((item) => (
+                <div key={item.id}>
+                  <Image
+                    src={getImagePath(item.logo_path)}
+                    alt={item.id}
+                    width={600}
+                    height={600}
+                    className="max-w-[200px] object-contain"
+                  />
+                  <p className="text-center p-3 text-black text-xl font-semibold">
+                    {item.name}
+                  </p>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );
