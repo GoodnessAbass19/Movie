@@ -93,7 +93,7 @@ const OnAirTvShow = () => {
           },
         }}
         freeMode={true}
-        // grabCursor={true}
+        grabCursor={true}
         keyboard={{
           enabled: true,
         }}

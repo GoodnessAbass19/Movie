@@ -93,7 +93,7 @@ const TopRatedTv = () => {
           },
         }}
         freeMode={true}
-        // grabCursor={true}
+        grabCursor={true}
         keyboard={{
           enabled: true,
         }}

@@ -88,6 +88,7 @@ const PopularMovies = () => {
             spaceBetween: 20,
           },
         }}
+        grabCursor={true}
         freeMode={true}
         keyboard={{
           enabled: true,

@@ -74,7 +74,7 @@ const TvShow = () => {
           },
         }}
         freeMode={true}
-        // grabCursor={true}
+        grabCursor={true}
         keyboard={{
           enabled: true,
         }}

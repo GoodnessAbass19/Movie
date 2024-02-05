@@ -96,6 +96,7 @@ const LatestMovies = () => {
         keyboard={{
           enabled: true,
         }}
+        grabCursor={true}
         modules={[Scrollbar, FreeMode]}
         className="mx-auto md:py-10 py-5 mySwiper"
       >

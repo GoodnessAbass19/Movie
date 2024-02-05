@@ -93,7 +93,7 @@ const LatestTvShow = () => {
           },
         }}
         freeMode={true}
-        // grabCursor={true}
+        grabCursor={true}
         keyboard={{
           enabled: true,
         }}

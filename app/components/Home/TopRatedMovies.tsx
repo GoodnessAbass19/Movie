@@ -95,6 +95,7 @@ const TopRatedMovies = () => {
           enabled: true,
         }}
         modules={[Scrollbar, FreeMode]}
+        grabCursor={true}
         className="mx-auto md:py-10 py-5 mySwiper"
       >
         {data?.results.map((item) => (

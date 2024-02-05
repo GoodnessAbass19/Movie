@@ -91,7 +91,7 @@ const PopularTvShow = () => {
           },
         }}
         freeMode={true}
-        // grabCursor={true}
+        grabCursor={true}
         keyboard={{
           enabled: true,
         }}
