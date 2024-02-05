@@ -104,9 +104,9 @@ const MovieDetails = ({ slug }: { slug: string }) => {
     <div>
       <div
         style={{ backgroundImage: `url(${imagePath + data?.backdrop_path})` }}
-        className="bg-cover bg-right-top bg-no-repeat flex flex-col w-full min-h-[70vh] justify-center items-center text-white"
+        className="bg-cover bg-right-top bg-no-repeat flex flex-col w-full min-h-[70vh] lg:min-h-screen xl:min-h-[70vh] justify-center items-center text-white"
       >
-        <div className=" bg-black/30 w-full min-h-[70vh]"></div>
+        <div className=" bg-black/30 w-full min-h-[70vh] lg:min-h-screen xl:min-h-[70vh]"></div>
         <div className="max-w-screen-2xl mx-auto absolute grid grid-rows-3 grid-flow-col gap-5 justify-between items-center mt-20 px-5">
           <div className="row-span-3 relative rounded-md mb-8">
             <div>
@@ -133,12 +133,12 @@ const MovieDetails = ({ slug }: { slug: string }) => {
               <h4 className="text-base font-medium">
                 {formattedDate}
                 <span>({data?.production_countries[0]?.iso_3166_1})</span>{" "}
-                {"  :"}
               </h4>
+              <span>|</span>
               <h4 className="text-lg font-semibold flex">
                 {concatenatedGenres}
-                {" :"}
               </h4>
+              <span>|</span>
               <h4 className="text-xl font-semibold">
                 {toHoursAndMinutes(data?.runtime || 60)}
               </h4>
@@ -176,7 +176,7 @@ const MovieDetails = ({ slug }: { slug: string }) => {
                   )}
                 </div>
                 <span className="inline-block text-lg capitalize font-semibold">
-                  viewer's rating
+                  user's score
                 </span>
               </div>
               <div>
@@ -227,7 +227,7 @@ const MovieDetails = ({ slug }: { slug: string }) => {
               <p className="text-base font-semibold">{data?.overview}</p>
             </div>
 
-            <div className="flex justify-between items-center flex-wrap">
+            <div className="flex justify-between items-center flex-wrap py-5">
               {data?.credits.crew.slice(0, 3).map((item) => (
                 <div key={item.id} className="text-start">
                   <h3 className="text-base font-semibold">{item.name}</h3>

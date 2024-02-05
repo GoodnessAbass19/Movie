@@ -17,7 +17,7 @@ const Images = ({ pics }: { pics: any }) => {
   const imagePath = "https://image.tmdb.org/t/p/original";
 
   return (
-    <div>
+    <div className="hidden lg:block">
       <button
         onClick={() => setImage(!image)}
         className="absolute opacity-0 hover:opacity-100 h-full hover:backdrop-blur-md bg-black/30 w-full text-xl font-semibold flex justify-center items-center"
