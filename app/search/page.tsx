@@ -16,7 +16,7 @@ const page = ({
 }) => {
   const movies = async () => {
     const res = await axios.get(
-      `${requests.searchMovies}&query=${
+      `${requests.searchMulti}&query=${
         searchParams.search
       }&include_adult=false&language=en-US&page=${searchParams.page || "1"}`
     );

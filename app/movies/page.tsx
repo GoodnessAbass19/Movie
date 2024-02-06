@@ -52,7 +52,7 @@ const page = ({
   }
 
   return (
-    <div className="max-w-screen-2xl mx-auto px-5 py-10">
+    <div className="max-w-screen-2xl mx-auto px-5 py-10 !min-h-screen">
       <div className="grid items-center justify-center space-y-10">
         <div className="flex justify-between items-center">
           <h1 className="text-2xl md:text-4xl font-bold capitalize">
