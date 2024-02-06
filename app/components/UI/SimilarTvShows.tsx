@@ -43,7 +43,7 @@ const SimilarTvShow = ({ slug }: { slug: string }) => {
   }
 
   return (
-    <div className="my-20 space-y-4 max-w-screen-2xl mx-auto">
+    <div className="my-20 space-y-4 max-w-screen-2xl mx-auto px-5">
       {data?.results.length ? (
         <>
           <h2 className="capitalize text-2xl font-semibold">

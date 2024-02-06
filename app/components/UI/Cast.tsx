@@ -62,7 +62,7 @@ const Cast = ({ cast }: { cast: credits }) => {
             {cast.cast.slice(0, 14).map((item) => (
               <SwiperSlide
                 key={item.id}
-                className="rounded-md dark:bg-white bg-black items-center dark:text-black text-white mb-5 max-h-[250px] xl:max-h-[300px]"
+                className="rounded-md dark:bg-white bg-black items-center dark:text-black text-white mb-5 min-h-[250px] xl:min-h-[300px]"
               >
                 <div>
                   <Image

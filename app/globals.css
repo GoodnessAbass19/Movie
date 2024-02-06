@@ -114,3 +114,30 @@
   pointer-events: none;
   z-index: 1;
 }
+
+@media (min-width: 440px) {
+  .video {
+    max-width: 385px;
+  }
+}
+@media (max-width: 400px) {
+  .video {
+    max-width: 335px;
+  }
+}
+
+@media (max-width: 390px) {
+  .video {
+    max-width: 320px;
+  }
+}
+@media (width: 390px) {
+  .video {
+    max-width: 350px;
+  }
+}
+/* @media (max-width: 820px) {
+  .video {
+    max-width: 640px;
+  }
+} */

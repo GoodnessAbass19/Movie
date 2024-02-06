@@ -80,7 +80,7 @@ const Videos = ({ slug }: { slug: string }) => {
         // </div>
         <div className="fixed bg-gray-500/80 w-full min-h-screen flex justify-center items-center h-full top-0 left-0 z-[999]">
           <div className="relative justify-center items-center rounded-md p-5  border-md lg:max-w-screen-md md:max-w-screen-lg xl:max-w-screen-xl max-w-[425px] mx-auto xl:right-10 w-full h-full inset-y-0 xl:top-20 lg:top-20 top-1/4">
-            <div className="flex justify-between items-center bg-black hover:text-white/80 rounded-t-md xl:mx-[87px] md:mx-11 p-2">
+            <div className="flex justify-between items-center bg-black hover:text-white/80 rounded-t-md xl:mx-[87px] md:mx-11 lg:mx-2 p-2">
               <h2 className="capitalize text-xl font-semibold">play Trailer</h2>
               <button onClick={() => setTrailer(false)}>
                 {" "}
@@ -97,7 +97,7 @@ const Videos = ({ slug }: { slug: string }) => {
                       src={`https://www.youtube.com/embed/${item.key}`}
                       allowFullScreen
                       // frameborder="20"
-                      className="rounded-b-md xl:max-w-screen-xl xl:h-[600px] lg:max-w-screen-md lg:h-[400px] md:max-w-screen-sm md:h-[400px] max-w-sm h-[300px] object-contain aspect-video mx-auto border-2 border-black shadow-lg shadow-black"
+                      className="rounded-b-md video xl:max-w-screen-xl xl:h-[600px] lg:max-w-screen-md lg:h-[400px] md:max-w-screen-sm md:h-[400px] max-w-[372px]  h-[300px] object-contain aspect-video mx-auto border-2 border-black shadow-lg shadow-black"
                     />
                   </div>
                 ))}

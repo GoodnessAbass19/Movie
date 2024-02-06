@@ -102,26 +102,148 @@ const MovieDetails = ({ slug }: { slug: string }) => {
 
   return (
     <div>
-      <div
-        style={{ backgroundImage: `url(${imagePath + data?.backdrop_path})` }}
-        className="bg-cover bg-right-top bg-no-repeat flex flex-col w-full min-h-[70vh] lg:min-h-screen xl:min-h-[70vh] justify-center items-center text-white"
-      >
-        <div className=" bg-black/30 w-full min-h-[70vh] lg:min-h-screen xl:min-h-[70vh]"></div>
-        <div className="max-w-screen-2xl mx-auto absolute grid grid-rows-3 grid-flow-col gap-5 justify-between items-center mt-20 px-5">
-          <div className="row-span-3 relative rounded-md mb-8">
-            <div>
-              <Images pics={data?.images.posters} />
+      <div>
+        <div
+          style={{ backgroundImage: `url(${imagePath + data?.backdrop_path})` }}
+          className="bg-cover bg-right-top bg-no-repeat flex flex-col w-full min-h-[30vh] md:min-h-[80vh] lg:min-h-[90vh] xl:min-h-[70vh] justify-center items-center text-white"
+        >
+          <div className=" bg-black/30 w-full min-h-[30vh] md:min-h-[80vh] lg:min-h-[90vh] xl:min-h-[70vh]"></div>
+          <div className="max-w-screen-2xl mx-auto absolute grid grid-rows-3 grid-flow-col gap-5 justify-between items-center mt-10 md:mt-20 px-5">
+            <div className="row-span-3 relative rounded-md mb-8">
+              <div>
+                <Images pics={data?.images.posters} />
+              </div>
+              <Image
+                src={imagePath + data?.poster_path}
+                width={1000}
+                height={1000}
+                alt={data?.title || "movie"}
+                priority
+                className="rounded-md max-w-[100px] md:max-w-xs object-cover 2xl:min-h-[550px] xl:min-h-[450px] "
+              />
             </div>
-            <Image
-              src={imagePath + data?.poster_path}
-              width={1000}
-              height={1000}
-              alt={data?.title || "movie"}
-              priority
-              className="rounded-md max-w-xs object-cover 2xl:min-h-[550px] xl:min-h-[450px] "
-            />
-          </div>
 
+            <div className="hidden md:col-span-2 gap-2.5 md:grid">
+              <h2 className="text-3xl font-extrabold font-sans">
+                {data?.title}
+                <span className="inline-block text-xl px-1 font-normal">
+                  ({year})
+                </span>
+              </h2>
+              <div className="flex flex-wrap gap-2.5">
+                <h4 className="text-base font-medium">
+                  {formattedDate}
+                  <span>
+                    ({data?.production_countries[0]?.iso_3166_1})
+                  </span>{" "}
+                </h4>
+                <span>|</span>
+                <h4 className="text-lg font-semibold flex">
+                  {concatenatedGenres}
+                </h4>
+                <span>|</span>
+                <h4 className="text-xl font-semibold">
+                  {toHoursAndMinutes(data?.runtime || 60)}
+                </h4>
+              </div>
+
+              <div className="flex gap-5 items-center">
+                <div className="flex items-center gap-1">
+                  <div className="bg-black/70 rounded-full w-16 h-16 flex items-center justify-center">
+                    {number > 6.9 ? (
+                      <div
+                        style={{
+                          background: `conic-gradient(#22c55e ${result},rgb(234 179 8 / 0.5) ${result})`,
+                        }}
+                        className={`w-14 h-14 flex items-center justify-center rounded-full`}
+                      >
+                        <div className="text-xl  w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center group-hover:text-cyan-600">
+                          <span className="inline-block text-lg text-white">
+                            {result}
+                          </span>
+                        </div>
+                      </div>
+                    ) : (
+                      <div
+                        style={{
+                          background: `conic-gradient(#eab308 ${result},rgb(234 179 8 / 0.5) ${result})`,
+                        }}
+                        className={`w-14 h-14 flex items-center justify-center rounded-full`}
+                      >
+                        <div className="text-xl  w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center group-hover:text-cyan-600">
+                          <span className="inline-block text-lg text-white">
+                            {result}
+                          </span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  <span className="inline-block text-lg capitalize font-semibold">
+                    user's score
+                  </span>
+                </div>
+                <div>
+                  {number > 6.0 ? (
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button
+                            variant="outline"
+                            className="bg-black outline-black"
+                          >
+                            <StarIcon className="text-yellow-500 w-5 h-5" />
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Rated 5.0</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  ) : (
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button
+                            variant="outline"
+                            className="bg-black outline-black"
+                          >
+                            <StarIcon className="w-5 h-5" />
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Rate it</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  )}
+                </div>
+                <Videos slug={`https://api.themoviedb.org/3/movie/${slug}`} />
+              </div>
+
+              <p className="text-lg font-normal font-montserrat text-white/80">
+                {data?.tagline}{" "}
+              </p>
+            </div>
+            <div className="hidden md:block md:row-span-2 md:col-span-2 xl:space-y-5 pb-10">
+              <div className="xl:gap-2.5 gap-1.5 grid">
+                <h2 className="text-2xl font-semibold">Overview</h2>
+                <p className="text-base font-semibold">{data?.overview}</p>
+              </div>
+
+              <div className="flex justify-between items-center flex-wrap py-5">
+                {data?.credits.crew.slice(0, 3).map((item) => (
+                  <div key={item.id} className="text-start">
+                    <h3 className="text-base font-semibold">{item.name}</h3>
+                    <p className="text-sm font-normal font-montserrat text-white">
+                      {item.job}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="md:hidden block p-5 space-y-10">
           <div className="col-span-2 gap-2.5 grid">
             <h2 className="text-3xl font-extrabold font-sans">
               {data?.title}
@@ -129,22 +251,22 @@ const MovieDetails = ({ slug }: { slug: string }) => {
                 ({year})
               </span>
             </h2>
-            <div className="flex flex-wrap gap-2.5">
+            <div className="flex flex-wrap gap-1">
               <h4 className="text-base font-medium">
                 {formattedDate}
                 <span>({data?.production_countries[0]?.iso_3166_1})</span>{" "}
               </h4>
               <span>|</span>
-              <h4 className="text-lg font-semibold flex">
+              <h4 className="text-base font-semibold flex">
                 {concatenatedGenres}
               </h4>
               <span>|</span>
-              <h4 className="text-xl font-semibold">
+              <h4 className="text-base font-semibold">
                 {toHoursAndMinutes(data?.runtime || 60)}
               </h4>
             </div>
 
-            <div className="flex gap-5 items-center">
+            <div className="flex gap-3 items-center">
               <div className="flex items-center gap-1">
                 <div className="bg-black/70 rounded-full w-16 h-16 flex items-center justify-center">
                   {number > 6.9 ? (
@@ -175,7 +297,7 @@ const MovieDetails = ({ slug }: { slug: string }) => {
                     </div>
                   )}
                 </div>
-                <span className="inline-block text-lg capitalize font-semibold">
+                <span className="inline-block text-base capitalize font-semibold">
                   user's score
                 </span>
               </div>
@@ -221,14 +343,14 @@ const MovieDetails = ({ slug }: { slug: string }) => {
               {data?.tagline}{" "}
             </p>
           </div>
-          <div className="row-span-2 col-span-2 xl:space-y-5 pb-10">
+          <div className="md:row-span-2 md:col-span-2 space-y-5 pb-10">
             <div className="xl:gap-2.5 gap-1.5 grid">
               <h2 className="text-2xl font-semibold">Overview</h2>
               <p className="text-base font-semibold">{data?.overview}</p>
             </div>
 
-            <div className="flex justify-between items-center flex-wrap py-5">
-              {data?.credits.crew.slice(0, 3).map((item) => (
+            <div className="flex justify-between items-center gap-5 flex-wrap py-5">
+              {data?.credits.crew.slice(0, 4).map((item) => (
                 <div key={item.id} className="text-start">
                   <h3 className="text-base font-semibold">{item.name}</h3>
                   <p className="text-sm font-normal font-montserrat text-white">
