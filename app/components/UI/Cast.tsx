@@ -22,7 +22,7 @@ const Cast = ({ cast }: { cast: credits }) => {
 
   return (
     <div className="w-full mt-20 max-w-screen-2xl md:mx-auto px-5">
-      {cast.cast.length && (
+      {cast.cast.length ? (
         <div>
           <h2 className="text-2xl capitalize font-semibold">Top billed cast</h2>
           <Swiper
@@ -84,7 +84,7 @@ const Cast = ({ cast }: { cast: credits }) => {
             ))}
           </Swiper>
         </div>
-      )}
+      ) : null}
     </div>
   );
 };
