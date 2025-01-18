@@ -133,6 +133,7 @@ export function CheckboxReactHookFormMultiple({
     router.refresh();
     form.reset();
   }
+  
 
   return (
     <DropdownMenu>
